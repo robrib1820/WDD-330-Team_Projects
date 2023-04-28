@@ -1,8 +1,13 @@
 https://trello.com/b/etxOGHAE/sleepoutside
-Robson Ribeiro
+Robson Neves Ribeiro
 Sebastiao Matusse
+<<<<<<< HEAD
 <<<<<<< HEAD
 Nnanna Uko Arua
 =======
 Efita Effiom
 >>>>>>> a4b24dfc68cef8e83377cd703e7d3583f8e8aaf2
+=======
+Efita Effiom
+Aaron Lamoreaux
+>>>>>>> 84745a39eee6df325388812e61f2551e09379bdc

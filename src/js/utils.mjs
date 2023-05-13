@@ -30,3 +30,22 @@ export function getParam(param) {
   // console.log(param);
   return urlParams.get(param);
 }
+
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = true
+) {
+  if (clear === true) {
+    while (parentElement.lastElementChild) {
+      parentElement.removeChild(parentElement.lastElementChild);
+    }
+    const cards = list.map(templateFn);
+    parentElement.insertAdjacentHTML(position, cards);
+  } else {
+    const cards = list.map(templateFn);
+    parentElement.insertAdjacentHTML(position, cards);
+  }
+}

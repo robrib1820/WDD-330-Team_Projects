@@ -49,3 +49,45 @@ export function renderListWithTemplate(
     parentElement.insertAdjacentHTML(position, cards);
   }
 }
+
+export function renderWithTemplate(
+  template,
+  parentElement,
+  data,
+  position = "afterbegin",
+  clear = true,
+  callback
+) {
+  if (clear) {
+    parentElement.innerhtml = "";
+  }
+  parentElement.insertAdjacentHTML(position, template);
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  
+  async function f() {
+    const response = await fetch(path);
+
+    if(response.ok) {
+      const text = await response.text();
+      return text;
+    }
+  }
+  console.log(f);
+  return f;
+}
+
+export function loadHeaderFooter() {
+  const headerTemplateFn = loadTemplate("/partials/header.html");
+  const footerTemplateFn = loadTemplate("/partials/footer.html");
+  const headerId = document.querySelector("#main-header");
+  const footerID = document.querySelector("#main-footer");
+
+  renderWithTemplate(headerTemplateFn, headerId);
+  renderWithTemplate(footerTemplateFn, footerID);
+  console.log(headerTemplateFn);
+}

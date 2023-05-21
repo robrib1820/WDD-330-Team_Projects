@@ -13,7 +13,7 @@ export default async function productDetails(productId) {
   document.getElementById("addToCart").addEventListener("click", addToCart);
 }
 
-function addProductToCart(product) {
+export function addProductToCart(product) {
   setLocalStorage("so-cart", product);
 }
 

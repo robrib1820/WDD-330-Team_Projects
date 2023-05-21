@@ -49,3 +49,43 @@ export function renderListWithTemplate(
     parentElement.insertAdjacentHTML(position, cards);
   }
 }
+
+export async function renderWithTemplate(
+  templateFn,
+  parentElement,
+  data,
+  position = "afterbegin",
+  clear = true,
+  callback
+) {
+  if (clear) {
+    parentElement.innerhtml = "";
+  }
+
+  const htmlString = await templateFn(data);
+  // console.log(htmlString);
+  parentElement.insertAdjacentHTML(position, htmlString);
+  if (callback) {
+    callback(data);
+  }
+}
+
+function loadTemplate(path) {
+  return async function () {
+    const response = await fetch(path);
+    if (response.ok) {
+      const text = await response.text();
+      // console.log(text);
+      return text;
+    }
+  };
+}
+
+export function loadHeaderFooter() {
+  const headerTemplateFn = loadTemplate("/partials/header.html");
+  const footerTemplateFn = loadTemplate("/partials/footer.html");
+  const headerId = document.querySelector("#main-header");
+  const footerID = document.querySelector("#main-footer");
+  renderWithTemplate(headerTemplateFn, headerId);
+  renderWithTemplate(footerTemplateFn, footerID);
+}

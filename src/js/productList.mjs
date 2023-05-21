@@ -32,6 +32,6 @@ export default async function productList(selector, category) {
       list.push(product);
     }
   });
-  console.log(list); // This was used to test the if the function is working
+  // console.log(list); // This was used to test the if the function is working
   renderListWithTemplate(productCardTemplate, selector, list);
 }

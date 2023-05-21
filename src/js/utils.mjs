@@ -50,8 +50,8 @@ export function renderListWithTemplate(
   }
 }
 
-export function renderWithTemplate(
-  template,
+export async function renderWithTemplate(
+  templateFn,
   parentElement,
   data,
   position = "afterbegin",
@@ -61,24 +61,24 @@ export function renderWithTemplate(
   if (clear) {
     parentElement.innerhtml = "";
   }
-  parentElement.insertAdjacentHTML(position, template);
+
+  const htmlString = await templateFn(data);
+  // console.log(htmlString);
+  parentElement.insertAdjacentHTML(position, htmlString);
   if (callback) {
     callback(data);
   }
 }
 
-export async function loadTemplate(path) {
-  
-  async function f() {
+function loadTemplate(path) {
+  return async function () {
     const response = await fetch(path);
-
-    if(response.ok) {
+    if (response.ok) {
       const text = await response.text();
+      // console.log(text);
       return text;
     }
-  }
-  console.log(f);
-  return f;
+  };
 }
 
 export function loadHeaderFooter() {
@@ -86,8 +86,6 @@ export function loadHeaderFooter() {
   const footerTemplateFn = loadTemplate("/partials/footer.html");
   const headerId = document.querySelector("#main-header");
   const footerID = document.querySelector("#main-footer");
-
   renderWithTemplate(headerTemplateFn, headerId);
   renderWithTemplate(footerTemplateFn, footerID);
-  console.log(headerTemplateFn);
 }

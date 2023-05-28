@@ -26,7 +26,7 @@ export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get("product");
-  console.log(urlParams.get(param));
+  // console.log(urlParams.get(param));
   // console.log(param);
   return urlParams.get(param);
 }
@@ -89,3 +89,11 @@ export function loadHeaderFooter() {
   renderWithTemplate(headerTemplateFn, headerId);
   renderWithTemplate(footerTemplateFn, footerID);
 }
+
+// we should have a function that is gonna handle then category issue
+// that fucntion needs to give us a behavor of getting the category according to
+// the selected category by the user
+
+// export function setCategory() {
+//   return
+// }
